@@ -1,0 +1,11 @@
+[project]
+name = "src"
+version = "0.0.1"
+description = "just a simple vehicle insurance ml-project"
+authors = [{name = "Abdullah", email = "baba.ama2006@gmail.com"}]
+
+[tool.setuptools]
+packages = {find = {}}
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
