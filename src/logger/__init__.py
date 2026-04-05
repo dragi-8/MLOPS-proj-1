@@ -7,7 +7,7 @@ from datetime import datetime
 from from_root import from_root
 
 LOG_DIR='logs'
-LOG_FILE=f'{datetime.now().strftime('%d/%m/%Y, %H:%M:%S')}.log'
+LOG_FILE=f'{datetime.now().strftime('%d-%m-%Y_%H-%M-%S')}.log'
 max_bytes=5*1024*1024
 backup_count=3
 
@@ -31,8 +31,9 @@ def configuire_log():
 
     logger.addHandler(console_handler)
     logger.addHandler(file_handler)
+    return logger
 
-configuire_log()
+logging = configuire_log()
 
 
 
