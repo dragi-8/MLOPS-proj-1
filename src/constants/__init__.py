@@ -1,0 +1,23 @@
+import os
+from datetime import datetime
+
+#for mongodb creation
+
+DB_NAME='PROJ-1'
+COLLECTION_NAME='PROJ-1-DATA'
+CONNECTION_URL='MONGODB_URL'
+
+ARTIFACT_DIR:str= 'artifact'
+PIPELINE_NAME:str=""
+
+
+DATA_FILE_NAME='data.csv'
+TRAIN_FILE_NAME='train.csv'
+TEST_FILE_NAME='test.csv'
+
+# DATA INNGESTION RELATED CONSTANTS
+
+DATA_INGESTION_DIR_NAME='data_ingestion'
+DATA_INGESTION_FEATURE_STORE_DIR='feature_store'
+DATA_INGESTED_DIR='ingested'
+DATA_INGESTION_TRAIN_TEST_RATIO:float=0.25

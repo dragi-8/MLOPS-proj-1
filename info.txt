@@ -4,4 +4,4 @@ babaama2006_db_user   lCJmpYStTrGH6D76
 python -m pip install "pymongo[srv]==3.12"
 
 
-mongodb+srv://babaama2006_db_user:lCJmpYStTrGH6D76@cluster0.ljf7oze.mongodb.net/?appName=cluster0
+'mongodb+srv://babaama2006_db_user:lCJmpYStTrGH6D76@cluster0.ljf7oze.mongodb.net/?appName=cluster0'

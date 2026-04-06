@@ -7,8 +7,13 @@ import sys
 # logging.error('this is an error message')
 # logging.critical('this is a critical message')
 
-try:
-    1+'a'
-except Exception as e:
-    logging.info(e)
-    raise MYexception(e,sys) from  e
+# try:
+#     1+'a'
+# except Exception as e:
+#     logging.info(e)
+#     raise MYexception(e,sys) from  e
+from src.pipline.training_pipeline import Trainpipeline
+pipelien=Trainpipeline()
+pipelien.run_pipeline(
+    
+)
