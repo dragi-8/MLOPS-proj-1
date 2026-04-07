@@ -14,6 +14,4 @@ import sys
 #     raise MYexception(e,sys) from  e
 from src.pipline.training_pipeline import Trainpipeline
 pipelien=Trainpipeline()
-pipelien.run_pipeline(
-    
-)
+pipelien.run_pipeline()
