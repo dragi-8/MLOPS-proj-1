@@ -12,8 +12,18 @@ class Datavalidationartifact:
     validation_condition:bool   
 
      
-# @dataclass
-# class Datatransformationartifact: 
+@dataclass
+class Datatransformationartifact: 
+    transformed_train_file_path:str
+    transformed_test_file_path:str
+    transformed_object_path:str
 
-# @dataclass
-# class Datavalidationartifact:
+@dataclass
+class Metricartifact:
+    f1_score:float
+    recall_score:float
+    precision_score:float
+@dataclass
+class Modeltrainerartifact:
+    model_file:str
+    metric:Metricartifact

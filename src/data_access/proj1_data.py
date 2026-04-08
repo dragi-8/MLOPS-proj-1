@@ -2,7 +2,7 @@ import sys
 import pandas as pd
 import numpy as np
 from typing import Optional
-
+from src.logger import logging
 from src.configuration.mongo_db_connection import Mongodb
 from src.constants import DB_NAME
 from src.exception import MYexception
@@ -43,7 +43,7 @@ class Proj1Data:
             else : 
                 collection = self.client[database_name][collection_name]  
 
-            print('fetching data from mongodb')
+            logging.info('fetching data from mongodb')
             df=pd.DataFrame(list(collection.find()))
             print('fetched data from db')
             if 'id 'in df.columns.to_list():

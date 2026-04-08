@@ -63,7 +63,7 @@ class Datavalidation:
             raise MYexception(e, sys)
     def initiate_data_validation(self):
         try:
-            train_data,test_data=(self.load_data(file_path=self.data_ingestion_artifact.train_data),self.load_data(file_path=self.data_ingestion_artifact.test_file_path))
+            train_data,test_data=(self.load_data(file_path=self.data_ingestion_artifact.train_file_path),self.load_data(file_path=self.data_ingestion_artifact.test_file_path))
             error_msg=""
 
             status=self.validate_number_of_columns(train_data)

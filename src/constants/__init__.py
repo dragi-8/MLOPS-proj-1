@@ -1,5 +1,11 @@
 import os
 from datetime import datetime
+try:
+    from dotenv import load_dotenv
+    from_root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    load_dotenv(os.path.join(from_root_path, '.env'))
+except ImportError:
+    pass  # dotenv not installed, will rely on system env vars
 
 #for mongodb creation
 
@@ -10,6 +16,9 @@ CONNECTION_URL='MONGODB_URL'
 ARTIFACT_DIR:str= 'artifact'
 PIPELINE_NAME:str=""
 SCHEMA_FILE_PATH=os.path.join('config','schema.yaml')
+
+TARGET_COLUMN='Response'
+PREPROCESSING_PIPELINE_OBJECT_NAME='preprocessing.pkl'
 
 
 DATA_FILE_NAME='data.csv'
@@ -30,5 +39,22 @@ DATA_VALIDATION_REPORT_FILE_NAME:str="report.yaml"
 
 
 # DATA TRANFORMATION RELATED CONSTANTS
-# DATA INNGESTION RELATED CONSTANTS
+DATA_TRANSFORMATION_DIR_NAME='data_transformation'
+DATA_TRANSFORMED_DIR_NAME='transformed'
+DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR='transformed_object'
+
+
+# MODEL TRAINING RELATED CONSTANTS
+MODEL_TRAINING_DIR_NAME='model_training'
+MODEL_TRAINER_TRAINED_DIR_NAME='trained'
+MODEL_TRAINER_TRAINED_MODEL_FILE_NAME='model.pkl'
+MODEL_TRAINER_CONFIG_FILE=os.path.join('config','model.yaml')
+MODEL_TRAINER_AVERAGE_SCORE=0.6
+MODEL_TRAINER_N_ESTIMATORS=200
+MODEL_TRAINER_MIN_SAMPLES_LEAF=6
+MODEL_TRAINER_MIN_SAMPLES_SPLIT=7
+MIN_SAMPLES_SPLIT_CRITERION='entropy'
+MIN_SAMPLES_SPLIT_MAX_DEPTH=10
+MIN_SAMPLES_SPLIT_RANDOM_STATE: int = 101
+
 

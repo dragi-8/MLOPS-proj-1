@@ -12,7 +12,7 @@ from src.logger import logging
 def read_yaml(filepath:str) -> dict:
     try:
         with open (filepath,"rb") as file:
-            yaml.safe_load(file)
+            return yaml.safe_load(file)
     except Exception as e:
         raise MYexception(e, sys) from e
         

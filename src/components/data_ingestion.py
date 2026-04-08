@@ -15,7 +15,7 @@ class Dataingestion:
 
         self.data_config=data_config
 
-    def load_data_from_mongodb(collection_name:str) -> pd.DataFrame   :
+    def load_data_from_mongodb(self, collection_name:str = None) -> pd.DataFrame:
         try:
             data=Proj1Data()
             df=data.export_collection_as_dataframe(collection_name=Dataingestionconfig.collection_name)
@@ -23,19 +23,19 @@ class Dataingestion:
             feature_store_path=Dataingestionconfig.feature_store_path
             dir_name=os.path.dirname(feature_store_path)
             os.makedirs(dir_name,exist_ok=True)
-            df.to_csv(feature_store_path)
+            df.to_csv(feature_store_path,index=False)
             return df
         except Exception as e:
             raise MYexception(e,sys)
-    def split_data_into_train_test(dataframe:pd.DataFrame) :
+    def split_data_into_train_test(self, dataframe:pd.DataFrame) -> None:
         try:
             train_data,test_data=train_test_split(dataframe,test_size=Dataingestionconfig.train_test_split_ratio)
             logging.info('Complete train ,test split on df')
 
             dir_path=os.path.dirname(Dataingestionconfig.training_file_path)
             os.makedirs(dir_path,exist_ok=True)
-            train_data.to_csv(Dataingestionconfig.training_file_path)
-            test_data.to_csv(Dataingestionconfig.testing_file_path)
+            train_data.to_csv(Dataingestionconfig.training_file_path,index=False)
+            test_data.to_csv(Dataingestionconfig.testing_file_path,index=False)
             logging.info('both  training and testing datasets saved')
         except Exception as e :
             raise MYexception(e,sys)   
