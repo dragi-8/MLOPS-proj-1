@@ -7,14 +7,14 @@ from src.components.data_validation import Datavalidation
 from src.components.data_transformation import Datatransformation
 from src.components.model_trainer import Modeltrainer
 from src.components.model_evaluation import ModelEvaluation
-# from src.components.model_pusher import Modelpusher
+from src.components.model_pusher import Modelpusher
 
 from src.entity.config_entity import Dataingestionconfig
-from src.entity.config_entity import Datavalidationconfig,Datatransformationconfig,Modeltrainerconfig,Modelevaluationconfig
+from src.entity.config_entity import Datavalidationconfig,Datatransformationconfig,Modeltrainerconfig,Modelevaluationconfig,Modelpusherconfig
 
 
 from src.entity.artifact_entity import Dataingestionartifact,Datatransformationartifact
-from src.entity.artifact_entity import Datavalidationartifact,Modeltrainerartifact,Modelevaluationartifact
+from src.entity.artifact_entity import Datavalidationartifact,Modeltrainerartifact,Modelevaluationartifact,Modelpusherartifact
 
 class Trainpipeline:
     def __init__(self):
@@ -23,6 +23,7 @@ class Trainpipeline:
         self.data_transformation_config=Datatransformationconfig()
         self.model_trainer_config=Modeltrainerconfig()
         self.model_evaluation_config=Modelevaluationconfig()
+        self.model_pusher_config=Modelpusherconfig()
 
 
     def start_data_ingetsion(self) -> Dataingestionartifact:
@@ -75,6 +76,16 @@ class Trainpipeline:
                 return model_evaluation_artifact
             except Exception as e:
                 raise MYexception(e,sys)
+
+    def start_model_pusher(self, model_eval_artifact:Modelevaluationartifact) -> Modelpusherartifact:     
+        try:
+            logging.info('starting model pusher pipeline')
+            model_pusher=Modelpusher(model_pusher_config=self.model_pusher_config, model_eval_artifact=model_eval_artifact)
+            model_pusher_artifact=model_pusher.initiate_model_pusher()
+            logging.info('completed model pusher pipeline')
+            return model_pusher_artifact
+        except Exception as e:
+            raise MYexception(e,sys)   
         
     def run_pipeline(self)  -> None:
         try:
@@ -85,6 +96,11 @@ class Trainpipeline:
             model_evaluation_artifact=self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact, model_trainer_artifact=model_trainer_artifact)
             logging.info('training pipeline completed')
 
-            
+            if not model_evaluation_artifact.is_model_accepted:
+                logging.info('model rejected')
+                raise Exception('Trained model is not better than the best model')
+            model_pusher_artifact=self.start_model_pusher(model_eval_artifact=model_evaluation_artifact)
+
+
         except Exception as e:
             raise MYexception(e,sys )   
