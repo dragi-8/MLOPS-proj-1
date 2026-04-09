@@ -67,3 +67,6 @@ MODEL_FILE_NAME='model.pkl'
 MODEL_BUCKET_NAME='proj-1-bucket'
 MODEL_PUSHER_S3_KEY='model-registry'
 
+
+APP_HOST = "0.0.0.0"
+APP_PORT = 5000

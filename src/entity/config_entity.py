@@ -57,5 +57,7 @@ class Modelpusherconfig:
     model_bucket_name=MODEL_BUCKET_NAME
     model_key_path=MODEL_FILE_NAME  
 
-
-
+@dataclass
+class Vehiclepredictorconfig:
+    model_bucket_name=MODEL_BUCKET_NAME
+    model_key_path=MODEL_FILE_NAME
