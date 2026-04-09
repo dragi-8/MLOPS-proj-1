@@ -46,6 +46,16 @@ class Modeltrainerconfig:
     model_max_depth=MIN_SAMPLES_SPLIT_MAX_DEPTH
     model_criterion=MIN_SAMPLES_SPLIT_CRITERION
 
+@dataclass
+class Modelevaluationconfig:
+    model_threshhold_difference=MODEL_EVALUATION_CHANGED_THRESHHOLD
+    model_bucket_name=MODEL_BUCKET_NAME
+    model_key_path=MODEL_FILE_NAME
+
+@dataclass
+class Modelpusherconfig:  
+    model_bucket_name=MODEL_BUCKET_NAME
+    model_key_path=MODEL_FILE_NAME  
 
 
 

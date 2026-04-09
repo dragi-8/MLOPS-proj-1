@@ -6,13 +6,15 @@ from src.components.data_ingestion import Dataingestion
 from src.components.data_validation import Datavalidation
 from src.components.data_transformation import Datatransformation
 from src.components.model_trainer import Modeltrainer
+from src.components.model_evaluation import ModelEvaluation
+# from src.components.model_pusher import Modelpusher
 
 from src.entity.config_entity import Dataingestionconfig
-from src.entity.config_entity import Datavalidationconfig,Datatransformationconfig,Modeltrainerconfig
+from src.entity.config_entity import Datavalidationconfig,Datatransformationconfig,Modeltrainerconfig,Modelevaluationconfig
 
 
 from src.entity.artifact_entity import Dataingestionartifact,Datatransformationartifact
-from src.entity.artifact_entity import Datavalidationartifact,Modeltrainerartifact
+from src.entity.artifact_entity import Datavalidationartifact,Modeltrainerartifact,Modelevaluationartifact
 
 class Trainpipeline:
     def __init__(self):
@@ -20,6 +22,7 @@ class Trainpipeline:
         self.data_validation_config=Datavalidationconfig()
         self.data_transformation_config=Datatransformationconfig()
         self.model_trainer_config=Modeltrainerconfig()
+        self.model_evaluation_config=Modelevaluationconfig()
 
 
     def start_data_ingetsion(self) -> Dataingestionartifact:
@@ -62,6 +65,16 @@ class Trainpipeline:
             return model_trainer_artifact
         except Exception as e:
             raise MYexception(e,sys)
+
+        def start_model_evaluation(self, data_ingestion_artifact:Dataingestionartifact, model_trainer_artifact:Modeltrainerartifact) -> Modelevaluationartifact:
+            try:
+                logging.info('starting model evaluation pipeline')
+                model_evaluation=ModelEvaluation(model_eval_config=self.model_evaluation_config, data_ingestion_artifact=data_ingestion_artifact, model_trainer_artifact=model_trainer_artifact)
+                model_evaluation_artifact=model_evaluation.initiate_model_evaluation()
+                logging.info('completed model evaluation pipeline')
+                return model_evaluation_artifact
+            except Exception as e:
+                raise MYexception(e,sys)
         
     def run_pipeline(self)  -> None:
         try:
@@ -69,5 +82,9 @@ class Trainpipeline:
             data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact=self.start_data_transformation(data_ingestion_artifact=data_ingestion_artifact, data_validation_artifact=data_validation_artifact)
             model_trainer_artifact=self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
+            model_evaluation_artifact=self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact, model_trainer_artifact=model_trainer_artifact)
+            logging.info('training pipeline completed')
+
+            
         except Exception as e:
             raise MYexception(e,sys )   

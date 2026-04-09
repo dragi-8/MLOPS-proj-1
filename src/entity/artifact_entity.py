@@ -27,3 +27,17 @@ class Metricartifact:
 class Modeltrainerartifact:
     model_file:str
     metric:Metricartifact
+
+
+@dataclass
+class Modelevaluationartifact:
+    is_model_updated:bool
+    improved_accuracy:float
+    s3_model_path:str
+    trained_model_path:str
+
+@dataclass
+class Modelpusherartifact:
+    s3_model_path:str
+    bucket_name:str    
+

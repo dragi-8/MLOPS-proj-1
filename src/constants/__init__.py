@@ -20,6 +20,10 @@ SCHEMA_FILE_PATH=os.path.join('config','schema.yaml')
 TARGET_COLUMN='Response'
 PREPROCESSING_PIPELINE_OBJECT_NAME='preprocessing.pkl'
 
+AWS_ACCESS_KEY_ID_ENV_KEY = "AWS_ACCESS_KEY_ID"
+AWS_SECRET_ACCESS_KEY_ENV_KEY = "AWS_SECRET_ACCESS_KEY"
+REGION_NAME = "us-east-1"
+
 
 DATA_FILE_NAME='data.csv'
 TRAIN_FILE_NAME='train.csv'
@@ -57,4 +61,9 @@ MIN_SAMPLES_SPLIT_CRITERION='entropy'
 MIN_SAMPLES_SPLIT_MAX_DEPTH=10
 MIN_SAMPLES_SPLIT_RANDOM_STATE: int = 101
 
+#model_evaluation and pushing related constants
+MODEL_EVALUATION_CHANGED_THRESHHOLD:float=0.02
+MODEL_FILE_NAME='model.pkl'
+MODEL_BUCKET_NAME='proj-1-bucket'
+MODEL_PUSHER_S3_KEY='model-registry'
 
