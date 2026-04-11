@@ -1,6 +1,11 @@
-logs
-notebook
-venv
+logs/
+notebook/
+venv/
+
+vehicle/
+.git
+__pycache__
+*.egg-info
 info.txt
 demo.py
-artifact
+artifact/
