@@ -55,7 +55,7 @@ class Dataform:
 async def index(request:Request):
     return templates.TemplateResponse('index.html',{"request":request,'context':'rendering'}) 
 
-@app.get("/train"):
+@app.get("/train")
 async def train_route():
     try:
         train_pipeline=Trainpipeline()
